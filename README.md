@@ -14,7 +14,7 @@ The core Dovecot package can be installed by simply doing:
 include dovecot
 ```
 
-## Enabling IMAP
+### Enabling IMAP
 
 IMAP support can be installed by doing:
 
@@ -26,7 +26,7 @@ class { 'dovecot':
 }
 ```
 
-## Enabling the auth service
+### Enabling the auth service
 
 Should one wish to use Dovecot as an external auth service, for say, Postfix,
 this can be done with:
@@ -37,7 +37,7 @@ class { 'dovecot::auth':
 }
 ```
 
-## Enabling SSL
+### Enabling SSL
 
 SSL parameters can be configured using the *dovecot::ssl* class as follows:
 
@@ -50,7 +50,7 @@ class { 'dovecot::ssl':
 }
 ```
 
-## Creating Maildir directories
+### Creating Maildir directories
 
 Maildir directories can be created using this module. For example, on a
 system-wide skel level:
