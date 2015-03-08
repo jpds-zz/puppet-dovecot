@@ -1,7 +1,7 @@
 define dovecot::maildirmake (
   $directory,
   $user,
-) inherits dovecot::params {
+) {
   # The base class must be included first because it is used by parameter
   # defaults.
   if ! defined(Class['dovecot']) {
