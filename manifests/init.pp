@@ -11,7 +11,7 @@ class dovecot(
   }
 
   if $enable_imap == true {
-    package { "dovecot-imapd":
+    package { 'dovecot-imapd':
       ensure => installed,
     }
   }
