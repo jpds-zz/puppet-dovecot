@@ -72,6 +72,18 @@ describe 'dovecot', :type => 'class' do
           .without_content(/^protocols = pop3$/)
       }
     end
+    context "with login greeting set" do
+      let :params do
+        {
+          :login_greeting => 'Dovecot at imap.example.com.',
+        }
+      end
+    
+      it {
+        should contain_file('/etc/dovecot/dovecot.conf') \
+          .with_content(/^login_greeting = Dovecot at imap\.example\.com\.$/)
+      }
+    end
   end
 
   context "on a Red Hat OS" do

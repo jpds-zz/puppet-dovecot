@@ -20,8 +20,9 @@ IMAP support can be installed by doing:
 
 ```puppet
 class { 'dovecot':
-  enable_imap => true,
-  protocols   => 'imap',
+  enable_imap    => true,
+  protocols      => 'imap',
+  login_greeting => 'Dovecot ready.',
 }
 ```
 

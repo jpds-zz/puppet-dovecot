@@ -1,9 +1,10 @@
 # Default Dovecot class.
 class dovecot(
-  $package_name = $dovecot::params::package,
-  $service_name = $dovecot::params::service,
-  $enable_imap  = $dovecot::params::enable_imap,
-  $protocols    = $dovecot::params::protocols,
+  $package_name   = $dovecot::params::package,
+  $service_name   = $dovecot::params::service,
+  $enable_imap    = $dovecot::params::enable_imap,
+  $protocols      = $dovecot::params::protocols,
+  $login_greeting = 'Dovecot ready.',
 ) inherits dovecot::params {
   package { $package_name:
     ensure => installed,
