@@ -12,7 +12,7 @@ class dovecot(
     before => File['dovecot_dir'],
   }
 
-  if $enable_imap == true {
+  if $enable_imap == true and $::osfamily == 'Debian' {
     package { $package_imapd:
       ensure => installed,
     }
