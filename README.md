@@ -44,7 +44,9 @@ SSL parameters can be configured using the *dovecot::ssl* class as follows:
 ```puppet
 class { 'dovecot::ssl':
   enable_ssl      => true,
+  ssl_cert        => '</etc/dovecot/dovecot.pem',
   ssl_protocols   => '!SSLv3 !SSLv2',
+  ssl_key         => '</etc/dovecot/private/dovecot.pem',
 }
 ```
 

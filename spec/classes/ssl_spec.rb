@@ -35,6 +35,16 @@ describe 'dovecot::ssl', :type => 'class' do
 
     it {
       should contain_file('/etc/dovecot/conf.d/10-ssl.conf') \
+        .with_content(/^ssl_cert = <\/etc\/dovecot\/dovecot\.pem$/)
+    }
+
+    it {
+      should contain_file('/etc/dovecot/conf.d/10-ssl.conf') \
+        .with_content(/^ssl_key = <\/etc\/dovecot\/private\/dovecot\.pem$/)
+    }
+
+    it {
+      should contain_file('/etc/dovecot/conf.d/10-ssl.conf') \
         .with_content(/^ssl_protocols = !SSLv2$/)
     }
 
