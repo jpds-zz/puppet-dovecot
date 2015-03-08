@@ -30,7 +30,8 @@ describe 'dovecot::maildirmake', :type => :define do
           'command' => 'maildirmake.dovecot /etc/skel/Maildir && maildirmake.dovecot /etc/skel/Maildir/.Drafts && maildirmake.dovecot /etc/skel/Maildir/.Sent && maildirmake.dovecot /etc/skel/Maildir/.Trash && maildirmake.dovecot /etc/skel/Maildir/.Templates',
           'path'    => '/bin:/usr/bin',
           'user'    => 'root',
-          'creates' => '/etc/skel/Maildir'
+          'creates' => '/etc/skel/Maildir',
+          'require' => 'Package[dovecot-core]',
          )
        }
     end
@@ -61,7 +62,8 @@ describe 'dovecot::maildirmake', :type => :define do
           'command' => 'maildirmake.dovecot /etc/skel/Maildir && maildirmake.dovecot /etc/skel/Maildir/.Drafts && maildirmake.dovecot /etc/skel/Maildir/.Sent && maildirmake.dovecot /etc/skel/Maildir/.Trash && maildirmake.dovecot /etc/skel/Maildir/.Templates',
           'path'    => '/bin:/usr/bin',
           'user'    => 'root',
-          'creates' => '/etc/skel/Maildir'
+          'creates' => '/etc/skel/Maildir',
+          'require' => 'Package[dovecot]',
          )
        }
     end
