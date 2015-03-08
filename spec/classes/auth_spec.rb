@@ -48,6 +48,39 @@ describe 'dovecot::auth', :type => 'class' do
           .with_content(/^   port = 12345$/)
       }
     end
+
+    context "with service_auth enabled with different port" do
+      let :params do
+        {
+          :service_auth      => true,
+          :service_auth_port => '12341'
+        }
+      end
+
+      it {
+        should contain_file('/etc/dovecot/conf.d/10-auth.conf') \
+          .with_content(/^service auth \{$/)
+      }
+
+      it {
+        should contain_file('/etc/dovecot/conf.d/10-auth.conf') \
+          .with_content(/^   port = 12341$/)
+      }
+    end
+
+    context 'invalid service_auth setting' do
+      let :params do
+        {
+          :service_auth => 'test'
+        }
+      end
+
+      it do
+        expect {
+          should contain_file('/etc/dovecot/conf.d/10-auth.conf')
+        }.to raise_error(Puppet::Error, /\"test\" is not a boolean/)
+      end
+    end
   end
 
   context "on an unknown OS" do
