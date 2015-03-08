@@ -33,7 +33,10 @@ describe 'dovecot', :type => 'class' do
       )
     }
 
-    it { should contain_file('/etc/dovecot/dovecot.conf').that_requires('Package[dovecot-core]') }
+    it {
+      should contain_file('/etc/dovecot/dovecot.conf')
+        .that_requires('Package[dovecot-core]')
+    }
     
     it {
       should contain_file('/etc/dovecot/dovecot.conf').with(
