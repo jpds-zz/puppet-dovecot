@@ -38,6 +38,11 @@ describe 'dovecot::ssl', :type => 'class' do
         .with_content(/^ssl_protocols = !SSLv2$/)
     }
 
+    it {
+      should contain_file('/etc/dovecot/conf.d/10-ssl.conf') \
+        .with_content(/^ssl_cipher_list = ALL:!LOW:!SSLv2:!EXP:!aNULL$/)
+    }
+
     context "with enable_ssl" do
       let :params do
         {
@@ -75,6 +80,18 @@ describe 'dovecot::ssl', :type => 'class' do
       it {
         should contain_file('/etc/dovecot/conf.d/10-ssl.conf') \
           .with_content(/^ssl_protocols = !SSLv2 !SSLv3$/)
+      }
+    end
+    context "with ssl_cipher_list set" do
+      let :params do
+        {
+          :ssl_cipher_list => 'TLSv1+HIGH !SSLv2 !RC4 !aNULL !eNULL !3DES @STRENGTH',
+        }
+      end
+
+      it {
+        should contain_file('/etc/dovecot/conf.d/10-ssl.conf') \
+          .with_content(/^ssl_cipher_list = TLSv1\+HIGH !SSLv2 !RC4 !aNULL !eNULL !3DES @STRENGTH$/)
       }
     end
   end
