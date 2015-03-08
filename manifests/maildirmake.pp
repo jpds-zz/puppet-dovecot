@@ -10,9 +10,9 @@ define dovecot::maildirmake (
 
   exec { "maildirmake.dovecot-${directory}":
     command => "maildirmake.dovecot ${directory} && maildirmake.dovecot ${directory}/.Drafts && maildirmake.dovecot ${directory}/.Sent && maildirmake.dovecot ${directory}/.Trash && maildirmake.dovecot ${directory}/.Templates",
-    creates => "${directory}",
+    creates => $directory,
     path    => '/bin:/usr/bin',
-    user    => "${user}",
+    user    => $user,
     require => Package['dovecot-core'],
   }
 }
