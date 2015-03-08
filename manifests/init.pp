@@ -2,8 +2,10 @@
 class dovecot(
   $package_core   = $dovecot::params::package_core,
   $package_imapd  = $dovecot::params::package_imapd,
+  $package_pop3d  = $dovecot::params::package_pop3d,
   $service_name   = $dovecot::params::service,
   $enable_imap    = $dovecot::params::enable_imap,
+  $enable_pop3    = $dovecot::params::enable_pop3,
   $protocols      = $dovecot::params::protocols,
   $login_greeting = 'Dovecot ready.',
 ) inherits dovecot::params {
@@ -13,12 +15,20 @@ class dovecot(
   }
 
   validate_bool($enable_imap)
+  validate_bool($enable_pop3)
 
   if $enable_imap == true and $::osfamily == 'Debian' {
     package { $package_imapd:
       ensure => installed,
     }
   }
+
+  if $enable_pop3 == true and $::osfamily == 'Debian' {
+    package { $package_pop3d:
+      ensure => installed,
+    }
+  }
+
   class { '::dovecot::service':
     service_name => $service_name,
   }

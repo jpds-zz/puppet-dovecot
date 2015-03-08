@@ -57,7 +57,7 @@ describe 'dovecot', :type => 'class' do
       let :params do
         {
           :enable_imap => true,
-          :protocols => 'imaps',
+          :protocols   => 'imaps',
         }
       end
 
@@ -75,6 +75,30 @@ describe 'dovecot', :type => 'class' do
           .without_content(/^protocols = pop3$/)
       }
     end
+
+    context "with POP3 enabled" do
+      let :params do
+        {
+          :enable_pop3 => true,
+          :protocols   => 'pop3',
+        }
+      end
+
+      it {
+        should contain_package('dovecot-pop3d')
+      }
+
+      it {
+        should contain_file('/etc/dovecot/dovecot.conf') \
+          .with_content(/^protocols = pop3$/)
+      }
+
+      it {
+        should contain_file('/etc/dovecot/dovecot.conf') \
+          .without_content(/^protocols = imap$/)
+      }
+    end
+
     context "with login greeting set" do
       let :params do
         {
@@ -161,6 +185,29 @@ describe 'dovecot', :type => 'class' do
       it {
         should contain_file('/etc/dovecot/dovecot.conf') \
           .without_content(/^protocols = pop3$/)
+      }
+    end
+
+    context "with POP3 enabled" do
+      let :params do
+        {
+          :enable_pop3 => true,
+          :protocols   => 'pop3',
+        }
+      end
+
+      it {
+        should contain_package('dovecot')
+      }
+
+      it {
+        should contain_file('/etc/dovecot/dovecot.conf') \
+          .with_content(/^protocols = pop3$/)
+      }
+
+      it {
+        should contain_file('/etc/dovecot/dovecot.conf') \
+          .without_content(/^protocols = imap$/)
       }
     end
 
