@@ -17,7 +17,6 @@ class dovecot::auth(
     mode    => '0644',
     owner   => 'root',
     group   => 'root',
-    require => Package[$package_name],
     notify  => Class['Dovecot::Service'],
   }
 }

@@ -16,6 +16,8 @@ describe 'dovecot::auth', :type => 'class' do
       }
     end
 
+    it { should compile }
+
     it { should contain_file('/etc/dovecot/conf.d/10-auth.conf').with(
         'ensure' => 'present',
         'path'   => '/etc/dovecot/conf.d/10-auth.conf',
