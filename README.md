@@ -47,6 +47,29 @@ class { 'dovecot::ssl':
 }
 ```
 
+## Creating Maildir directories
+
+Maildir directories can be created using this module. For example, on a
+system-wide skel level:
+
+```puppet
+dovecot::maildirmake { 'skel-maildir':
+  directory => "/etc/skel/Maildir",
+  user      => "root",
+}
+```
+
+Or for a single user:
+
+
+```puppet
+dovecot::maildirmake { 'user-maildir':
+  directory => "/home/user/Maildir",
+  user      => "user",
+}
+```
+
 ## License
 
 See [LICENSE](LICENSE) file.
+
