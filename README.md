@@ -11,7 +11,7 @@ This Puppet module contains configurations for Dovecot.
 Dovecot can be installed by simply doing:
 
 ```puppet
-include strongswan
+include dovecot
 ```
 
 ## License
