@@ -2,11 +2,13 @@
 class dovecot::params {
   case $::osfamily {
     'Debian': {
-      $package  = 'dovecot-core'
+      $package_core  = 'dovecot-core'
+      $package_imapd = 'dovecot-imapd'
     }
 
     'RedHat': {
-      $package  = 'dovecot'
+      $package_core  = 'dovecot'
+      $package_imapd = 'dovecot'
     }
 
     default: {
