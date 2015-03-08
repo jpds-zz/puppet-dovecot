@@ -27,9 +27,27 @@ describe 'dovecot::auth', :type => 'class' do
     }
 
     it {
-      should contain_file('/etc/dovecot/dovecot.conf') \
+      should contain_file('/etc/dovecot/conf.d/10-auth.conf') \
         .without_content(/^service auth \{$/)
     }
+
+    context "with service_auth enabled" do
+      let :params do
+        {
+          :service_auth => true,
+        }
+      end
+
+      it {
+        should contain_file('/etc/dovecot/conf.d/10-auth.conf') \
+          .with_content(/^service auth \{$/)
+      }
+
+      it {
+        should contain_file('/etc/dovecot/conf.d/10-auth.conf') \
+          .with_content(/^   port = 12345$/)
+      }
+    end
   end
 
   context "on an unknown OS" do
