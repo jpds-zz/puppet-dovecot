@@ -33,6 +33,11 @@ describe 'dovecot::ssl', :type => 'class' do
         .with_content(/^ssl = no$/)
     }
 
+    it {
+      should contain_file('/etc/dovecot/conf.d/10-ssl.conf') \
+        .with_content(/^ssl_protocols = !SSLv2$/)
+    }
+
     context "with enable_ssl" do
       let :params do
         {
