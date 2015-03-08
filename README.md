@@ -26,6 +26,17 @@ class { 'dovecot':
 }
 ```
 
+### Enabling POP3
+
+Similiarly, POP3 support can be enabled by doing:
+
+```puppet
+class { 'dovecot':
+  enable_pop3    => true,
+  protocols      => 'pop3',
+}
+```
+
 ### Enabling the auth service
 
 Should one wish to use Dovecot as an external auth service, for say, Postfix,
