@@ -180,6 +180,22 @@ describe 'dovecot', :type => 'class' do
         .without_content(/^protocols = imaps$/)
     }
 
+    it {
+      should contain_file('/etc/dovecot/conf.d/10-master.conf').with(
+        'ensure' => 'present',
+        'mode'   => '0644',
+        'owner'  => 'root',
+        'group'  => 'root',
+        'notify' => 'Class[Dovecot::Service]',
+      )
+    }
+
+    it {
+      should contain_file('/etc/dovecot/conf.d/10-master.conf') \
+        .with_content(/^  process_limit = 1024$/)
+    }
+
+
     context "with IMAP enabled" do
       let :params do
         {
