@@ -37,7 +37,7 @@ describe 'dovecot', :type => 'class' do
       should contain_file('/etc/dovecot/dovecot.conf')
         .that_requires('Package[dovecot-core]')
     }
-    
+
     it {
       should contain_file('/etc/dovecot/dovecot.conf').with(
         'ensure' => 'present',
@@ -51,6 +51,21 @@ describe 'dovecot', :type => 'class' do
     it {
       should contain_file('/etc/dovecot/dovecot.conf') \
         .without_content(/^protocols = imaps$/)
+    }
+
+    it {
+      should contain_file('/etc/dovecot/conf.d/10-master.conf').with(
+        'ensure' => 'present',
+        'mode'   => '0644',
+        'owner'  => 'root',
+        'group'  => 'root',
+        'notify' => 'Class[Dovecot::Service]',
+      )
+    }
+
+    it {
+      should contain_file('/etc/dovecot/conf.d/10-master.conf') \
+        .with_content(/^  process_limit = 1024$/)
     }
 
     context "with IMAP enabled" do
